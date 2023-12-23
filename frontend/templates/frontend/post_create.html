@@ -1,0 +1,40 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+
+{% block title %}
+Создать пост
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row col-12 m-0">
+        <div class="form-login col-12 d-flex justify-content-between align-items-center">
+            <div>
+                <p>Создание поста</p>
+            </div>
+            <div>
+                <p><a href="/">Главная</a> / Создание поста</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <form @submit.prevent="createPost">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Заголовок:</label>
+                <input type="text" v-model="post.title" class="form-control" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Содержание:</label>
+                <textarea v-model="post.content" class="form-control" id="content" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary my-4">Создать</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block mixins %}
+<script src="{% static 'frontend/assets/js/create_post.js' %}"></script>
+{% endblock %}

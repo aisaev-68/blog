@@ -1,0 +1,53 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+
+{% block title %}
+Блоги
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="row col-12 m-0">
+        <div class="form-login col-12 d-flex justify-content-between align-items-center">
+            <div>
+                <p>Блоги</p>
+            </div>
+            <div>
+                <p><a href="/">Главная</a> / Блоги</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="popular-book wrap">
+            <div class="Section-content">
+
+                <div class="row">
+                    <div v-for="post in postCards" class="col-md-6 mb-4">
+                        <div class="card align-self-stretch h-100">
+                            <div class="card-body">
+                                <strong class="card-title">
+                                    <a :href="post.href">${ post.short_title }$</a>
+                                </strong>
+                                <div class="card-description pt-3">
+                                    <div class="card-cost">
+                                        <span class="card-price pt-4">${ post.short_content }$</span>
+                                    </div>
+                                    <div class="card-category pt-4">Автор: ${ post.author }$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block mixins %}
+<script src="{% static 'frontend/assets/js/posts.js' %}"></script>
+{% endblock %}
+
