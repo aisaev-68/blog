@@ -52,7 +52,7 @@ cd library
 
 3. Создайте виртуальное окружение:
 ```
-poetry install
+poetry install & poetry shell
 ```
 4. Для запуска проекта используйте команду `./entrypoint.sh`.
 Сначала установите права.
