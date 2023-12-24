@@ -7,7 +7,12 @@ from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 
 from .models import Post, Comment
-from .serializers import PostSerializer, CommentSerializer, CommentCreateSerializer, PostCreateSerializer
+from .serializers import (
+    PostSerializer,
+    CommentSerializer,
+    CommentCreateSerializer,
+    PostCreateSerializer,
+)
 
 
 class CreatePost(APIView):
