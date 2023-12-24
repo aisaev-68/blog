@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authtoken.models import Token
 from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import UserSerializer, UserLoginSerializer
@@ -41,10 +40,8 @@ class UserLoginAPIView(APIView):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                token, created = Token.objects.get_or_create(user=user)
                 return JsonResponse({
                     'success': True,
-                    'token': token.key,
                     'user_id': user.id,
                     'username': user.username
                 })
@@ -59,7 +56,6 @@ class UserLogoutAPIView(APIView):
 
     def post(self, request):
         try:
-            request.user.auth_token.delete()
             logout(request)
         except (AttributeError, ObjectDoesNotExist):
             pass  # Handle if token doesn't exist

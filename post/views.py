@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 
@@ -19,6 +19,7 @@ class CreatePost(APIView):
     """
     API создания постов.
     """
+
     permission_classes = [IsAdminUser]
 
     @swagger_auto_schema(request_body=PostCreateSerializer)
@@ -67,7 +68,7 @@ class CreateComment(APIView):
     """
     API создания комментария.
     """
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(request_body=CommentSerializer)
