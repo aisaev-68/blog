@@ -40,6 +40,8 @@ var mix = {
                         errorMessage = data.message.non_field_errors[0];
                     } else if (data.message.hasOwnProperty('email')) {
                         errorMessage = data.message.email[0];
+                     } else if (data.message.hasOwnProperty('username')) {
+                        errorMessage = data.message.username[0];
                     } else {
                         errorMessage = 'Unknown error occurred';
                     }
