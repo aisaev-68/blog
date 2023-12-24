@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -28,11 +27,10 @@ class UserRegistrationAPIView(APIView):
         return JsonResponse({'success': False, 'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-
-
 class UserLoginAPIView(APIView):
+    """
+    API входа в в систему.
+    """
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(request_body=UserLoginSerializer)
@@ -54,8 +52,6 @@ class UserLoginAPIView(APIView):
         return JsonResponse({'success': False, 'message': 'Invalid credentials'}, status=400)
 
 
-
-
 class UserLogoutAPIView(APIView):
     """
     API для выхода пользователя из системы.
@@ -63,7 +59,6 @@ class UserLogoutAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        print(request.user.auth_token)
         try:
             request.user.auth_token.delete()
             logout(request)

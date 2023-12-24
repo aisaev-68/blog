@@ -18,7 +18,6 @@ class CreatePost(APIView):
 
     @swagger_auto_schema(request_body=PostCreateSerializer)
     def post(self, request):
-        print(request.data)
         serializer = PostCreateSerializer(data={**request.data, 'author': request.user.id})
         if serializer.is_valid():
             serializer.save()
@@ -68,11 +67,6 @@ class CreateComment(APIView):
 
     @swagger_auto_schema(request_body=CommentSerializer)
     def post(self, request, post_id):
-
-        try:
-            post = Post.objects.get(id=post_id)
-        except Post.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = CommentCreateSerializer(data={**request.data, 'post': post_id, 'author': request.user.id})
 

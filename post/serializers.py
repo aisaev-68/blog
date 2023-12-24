@@ -15,7 +15,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'post', 'author', 'text', 'created_at']
 
     def get_author(self, obj) -> str:
-
         return f"{obj.author.first_name} {obj.author.last_name}"
 
 
@@ -51,14 +50,12 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CommentCreateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Comment
         fields = '__all__'
 
 
 class PostCreateSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Post
         fields = '__all__'
